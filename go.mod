@@ -1,4 +1,4 @@
-module rss-reader
+module github.com/metruzanca/rss
 
 go 1.22.4
 

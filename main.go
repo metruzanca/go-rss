@@ -1,7 +1,7 @@
 package main
 
 import (
-	"rss-reader/db"
+	"github.com/metruzanca/rss/db"
 )
 
 func main() {
