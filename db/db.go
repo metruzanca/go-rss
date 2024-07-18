@@ -1,1 +1,51 @@
+// https://docs.turso.tech/sdk/go/quickstart#local-embedded-replicas
 package db
+
+import (
+	"database/sql"
+	"fmt"
+	"os"
+	"path/filepath"
+	"time"
+
+	"github.com/tursodatabase/go-libsql"
+)
+
+var Db *sql.DB
+
+func Init() *sql.DB {
+	dbName := "local.db"
+	TURSO_DB_URL := os.Getenv("TURSO_DB_URL")
+	TURSO_DB_TOKEN := os.Getenv("TURSO_DB_TOKEN")
+
+	dir, err := os.MkdirTemp("", "libsql-*")
+	if err != nil {
+		fmt.Println("Error creating temporary directory:", err)
+		os.Exit(1)
+	}
+	// defer os.RemoveAll(dir)
+
+	dbPath := filepath.Join(dir, dbName)
+
+	syncInterval := time.Minute
+
+	connector, err := libsql.NewEmbeddedReplicaConnector(dbPath, TURSO_DB_URL,
+		libsql.WithAuthToken(TURSO_DB_TOKEN),
+		libsql.WithSyncInterval(syncInterval),
+	)
+
+	if err := connector.Sync(); err != nil {
+		fmt.Println("Error syncing database:", err)
+	}
+
+	if err != nil {
+		fmt.Println("Error creating connector:", err)
+		os.Exit(1)
+	}
+	// defer connector.Close()
+
+	Db = sql.OpenDB(connector)
+	// defer db.Close()
+
+	return Db
+}

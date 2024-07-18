@@ -1,5 +1,10 @@
 package main
 
+import (
+	"rss-reader/db"
+)
+
 func main() {
-	println("Hello, World!")
+	db.Init()
+	db.GetUsers()
 }
