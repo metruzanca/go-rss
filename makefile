@@ -3,6 +3,5 @@ start:
 	templ generate -watch -proxy=http://localhost:3000
 
 build:
-	nix run github:a-h/templ &
-	templ generate &
+	nix run github:a-h/templ generate &
 	go build -o ./tmp/main .
