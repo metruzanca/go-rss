@@ -1,8 +1,13 @@
 [phases.setup]
-nixPkgs = ['templ']
+nixPkgs = ['...', 'templ']
 
-# [phases.build]
-# cmds = ['make build']
+[phases.build]
+cmds = ['templ generate', 'go build -o ./tmp/main .']
 
-# [start]
-# cmd = 'yarn run server:start'
+# TODO add tests
+# [phases.test]
+# cmds = ["yarn run test"]
+# dependsOn = ["build"]
+
+[start]
+cmd = './tmp/main'
