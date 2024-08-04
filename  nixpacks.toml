@@ -1,0 +1,8 @@
+[phases.setup]
+nixPkgs = ['templ']
+
+# [phases.build]
+# cmds = ['make build']
+
+# [start]
+# cmd = 'yarn run server:start'
