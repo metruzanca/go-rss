@@ -1,3 +1,4 @@
 .envrc
 tmp
 .vscode
+*_templ.txt
