@@ -1,86 +1,76 @@
 // https://docs.turso.tech/sdk/go/quickstart#local-embedded-replicas
 package db
 
-import (
-	"database/sql"
-	"fmt"
-	"os"
-	"path/filepath"
-	"time"
+// var Db *sql.DB
 
-	"github.com/tursodatabase/go-libsql"
-)
+// func Init() *sql.DB {
+// 	dbName := "local.db"
+// 	TURSO_DB_URL := os.Getenv("TURSO_DB_URL")
+// 	TURSO_DB_TOKEN := os.Getenv("TURSO_DB_TOKEN")
 
-var Db *sql.DB
+// 	dir, err := os.MkdirTemp("", "libsql-*")
+// 	if err != nil {
+// 		fmt.Println("Error creating temporary directory:", err)
+// 		os.Exit(1)
+// 	}
+// 	// defer os.RemoveAll(dir)
 
-func Init() *sql.DB {
-	dbName := "local.db"
-	TURSO_DB_URL := os.Getenv("TURSO_DB_URL")
-	TURSO_DB_TOKEN := os.Getenv("TURSO_DB_TOKEN")
+// 	dbPath := filepath.Join(dir, dbName)
 
-	dir, err := os.MkdirTemp("", "libsql-*")
-	if err != nil {
-		fmt.Println("Error creating temporary directory:", err)
-		os.Exit(1)
-	}
-	// defer os.RemoveAll(dir)
+// 	syncInterval := time.Minute
 
-	dbPath := filepath.Join(dir, dbName)
+// 	connector, err := libsql.NewEmbeddedReplicaConnector(dbPath, TURSO_DB_URL,
+// 		libsql.WithAuthToken(TURSO_DB_TOKEN),
+// 		libsql.WithSyncInterval(syncInterval),
+// 	)
 
-	syncInterval := time.Minute
+// 	if err := connector.Sync(); err != nil {
+// 		fmt.Println("Error syncing database:", err)
+// 	}
 
-	connector, err := libsql.NewEmbeddedReplicaConnector(dbPath, TURSO_DB_URL,
-		libsql.WithAuthToken(TURSO_DB_TOKEN),
-		libsql.WithSyncInterval(syncInterval),
-	)
+// 	if err != nil {
+// 		fmt.Println("Error creating connector:", err)
+// 		os.Exit(1)
+// 	}
+// 	// defer connector.Close()
 
-	if err := connector.Sync(); err != nil {
-		fmt.Println("Error syncing database:", err)
-	}
+// 	Db = sql.OpenDB(connector)
+// 	// defer db.Close()
 
-	if err != nil {
-		fmt.Println("Error creating connector:", err)
-		os.Exit(1)
-	}
-	// defer connector.Close()
+// 	return Db
+// }
 
-	Db = sql.OpenDB(connector)
-	// defer db.Close()
+// type User struct {
+// 	ID   int
+// 	Name string
+// }
 
-	return Db
-}
+// func GetUsers() {
+// 	rows, err := Db.Query("SELECT * FROM users")
+// 	if err != nil {
+// 		fmt.Fprintf(os.Stderr, "failed to execute query: %v\n", err)
+// 		os.Exit(1)
+// 	}
+// 	defer rows.Close()
 
-type User struct {
-	ID   int
-	Name string
-}
+// 	var users []User
 
-func GetUsers() {
-	rows, err := Db.Query("SELECT * FROM users")
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "failed to execute query: %v\n", err)
-		os.Exit(1)
-	}
-	defer rows.Close()
+// 	for rows.Next() {
+// 		var user User
 
-	var users []User
+// 		if err := rows.Scan(&user.ID, &user.Name); err != nil {
+// 			fmt.Println("Error scanning row:", err)
+// 			return
+// 		}
 
-	for rows.Next() {
-		var user User
+// 		users = append(users, user)
+// 		fmt.Println(user.ID, user.Name)
+// 	}
 
-		if err := rows.Scan(&user.ID, &user.Name); err != nil {
-			fmt.Println("Error scanning row:", err)
-			return
-		}
-
-		users = append(users, user)
-		fmt.Println(user.ID, user.Name)
-	}
-
-	if err := rows.Err(); err != nil {
-		fmt.Println("Error during rows iteration:", err)
-	}
-}
+// 	if err := rows.Err(); err != nil {
+// 		fmt.Println("Error during rows iteration:", err)
+// 	}
+// }
 
 type Feed struct {
 	Id   uint
