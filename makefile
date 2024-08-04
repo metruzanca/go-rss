@@ -4,4 +4,5 @@ start:
 
 build:
 	templ generate &
+	nix run github:a-h/templ &
 	go build -o ./tmp/main .
