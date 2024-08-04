@@ -81,3 +81,9 @@ func GetUsers() {
 		fmt.Println("Error during rows iteration:", err)
 	}
 }
+
+type Feed struct {
+	Id   uint
+	Url  string
+	Name string
+}

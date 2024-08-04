@@ -1,2 +1,5 @@
 .envrc
 tmp
+.vscode
+*_templ.go
+*_templ.txt
