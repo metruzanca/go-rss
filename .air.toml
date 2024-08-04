@@ -21,9 +21,7 @@ tmp_dir = "tmp"
   poll = false
   poll_interval = 0
   post_cmd = []
-  pre_cmd = [
-    # "templ generate -watch -proxy=http://localhost:3000",
-  ]
+  pre_cmd = []
   rerun = false
   rerun_delay = 500
   send_interrupt = false

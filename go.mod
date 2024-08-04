@@ -3,15 +3,14 @@ module github.com/metruzanca/rss
 go 1.22.4
 
 require (
+	github.com/a-h/templ v0.2.747
 	github.com/labstack/echo/v4 v4.12.0
 	github.com/tursodatabase/go-libsql v0.0.0-20240429120401-651096bbee0b
 )
 
 require (
-	github.com/a-h/templ v0.2.747 // indirect
 	github.com/antlr4-go/antlr/v4 v4.13.0 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
-	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/labstack/gommon v0.4.2 // indirect
 	github.com/libsql/sqlite-antlr4-parser v0.0.0-20240327125255-dbf53b6cbf06 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect

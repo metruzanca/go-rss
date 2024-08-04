@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/labstack/echo/v4"
@@ -30,9 +31,16 @@ var feeds = []db.Feed{
 	},
 }
 
-const PORT = ":3000"
+func env(key string, defaultValue string) string {
+	value := os.Getenv(key)
+	if value == "" {
+		return defaultValue
+	}
+	return value
+}
 
 func main() {
+	PORT := env("PORT", "3000")
 
 	e := echo.New()
 	e.Use(middleware.Logger())
@@ -58,5 +66,5 @@ func main() {
 	})
 
 	fmt.Printf("Listening on http://localhost%s", PORT)
-	e.Start(PORT)
+	e.Start(":" + PORT)
 }
