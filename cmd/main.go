@@ -1,9 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/metruzanca/rss/lib/server"
+)
 
 func main() {
-	server := NewServer()
+	server := server.NewServer()
 
 	err := server.ListenAndServe()
 	if err != nil {
