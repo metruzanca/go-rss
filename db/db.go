@@ -72,8 +72,15 @@ package db
 // 	}
 // }
 
+type FeedItem struct {
+	Title       string
+	Description string
+	Url         string
+}
+
 type Feed struct {
-	Id   uint
-	Url  string
-	Name string
+	Id    uint
+	Url   string
+	Title string
+	Items []FeedItem
 }

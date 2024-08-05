@@ -38,7 +38,9 @@ templ Layout(name string) {
     <body>
       @Navigation()
       <div class="w-full flex items-center justify-center">
-        { children... }
+        <div>
+          { children... }
+        </div>
       </div>
     </body>
   </html>
@@ -51,7 +53,7 @@ templ Feeds(feeds []db.Feed) {
       for _, item := range feeds {
         <div>
           <h2>
-            <a class="underline" href={templ.URL(fmt.Sprintf("/f/%d", item.Id))}>{item.Name}</a>
+            <a class="underline" href={templ.URL(fmt.Sprintf("/f/%d", item.Id))}>{item.Title}</a>
           </h2>
           // <a href={templ.URL(item.Url)}>{item.Url}</a>
         </div>
@@ -61,8 +63,19 @@ templ Feeds(feeds []db.Feed) {
 }
 
 templ FeedPage(feed db.Feed) {
-  @Layout(feed.Name) {
-    <h1>{feed.Name}</h1>
-    TODO feed
+  @Layout(feed.Title) {
+    <h1 class="text-xl">{feed.Title}</h1>
+    <div class="flex flex-col gap-4">
+      for _, item := range feed.Items {
+        <div>
+          <a class="underline" href={templ.URL(item.Url)}>
+            <h2>{item.Title}</h2>
+          </a>
+          <div>
+            @templ.Raw(item.Description)
+          </div>
+        </div>
+      }
+    </div>
   }
 }
