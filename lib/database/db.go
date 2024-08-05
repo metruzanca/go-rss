@@ -1,5 +1,5 @@
 // https://docs.turso.tech/sdk/go/quickstart#local-embedded-replicas
-package db
+package database
 
 import "database/sql"
 

@@ -1,4 +1,4 @@
-package db
+package turso
 
 // See https://docs.turso.tech/sdk/go/quickstart#local-embedded-replicas
 

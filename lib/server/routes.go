@@ -7,8 +7,8 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/metruzanca/rss/lib/db"
-	"github.com/metruzanca/rss/lib/rss"
+	"github.com/metruzanca/rss/lib/database"
+	"github.com/metruzanca/rss/lib/server/rss"
 	"github.com/metruzanca/rss/lib/views"
 )
 
@@ -20,7 +20,7 @@ import (
 // }
 
 // Some example feeds to get started with
-var feeds = []db.Feed{
+var feeds = []database.Feed{
 	{
 		Id:    0,
 		Title: "Jack O'Shea",
@@ -38,7 +38,7 @@ var feeds = []db.Feed{
 	},
 }
 
-func RegisterRoutes(appState *db.AppState) http.Handler {
+func RegisterRoutes(appState *database.AppState) http.Handler {
 	e := echo.New()
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
@@ -68,7 +68,7 @@ func RegisterRoutes(appState *db.AppState) http.Handler {
 		parsedRss := rss.Parse(feed.Url)
 
 		for _, item := range parsedRss.Items {
-			feed.Items = append(feed.Items, db.FeedItem{
+			feed.Items = append(feed.Items, database.FeedItem{
 				Title:       item.Title,
 				Description: item.Description,
 				Url:         item.Link,
