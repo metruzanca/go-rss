@@ -3,14 +3,13 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"os"
 	"strconv"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/metruzanca/rss/db"
-	"github.com/metruzanca/rss/rss"
-	"github.com/metruzanca/rss/views"
+	"github.com/metruzanca/rss/lib/db"
+	"github.com/metruzanca/rss/lib/rss"
+	"github.com/metruzanca/rss/lib/views"
 )
 
 // TODO move to these, and save some data in db
@@ -39,17 +38,7 @@ var feeds = []db.Feed{
 	},
 }
 
-func env(key string, defaultValue string) string {
-	value := os.Getenv(key)
-	if value == "" {
-		return defaultValue
-	}
-	return value
-}
-
-func main() {
-	PORT := env("PORT", "3000")
-
+func RegisterRoutes() http.Handler {
 	e := echo.New()
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
@@ -86,6 +75,5 @@ func main() {
 		return views.Render(c, views.FeedPage(feed))
 	})
 
-	fmt.Printf("Listening on http://localhost:%s", PORT)
-	e.Start(":" + PORT)
+	return e
 }
