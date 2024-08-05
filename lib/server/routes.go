@@ -38,7 +38,7 @@ var feeds = []db.Feed{
 	},
 }
 
-func RegisterRoutes() http.Handler {
+func RegisterRoutes(appState *db.AppState) http.Handler {
 	e := echo.New()
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
@@ -77,6 +77,8 @@ func RegisterRoutes() http.Handler {
 
 		return views.Render(c, views.FeedPage(feed))
 	})
+
+	RegisterAuthRoutes(e)
 
 	return e
 }
