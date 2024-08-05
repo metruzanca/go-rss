@@ -2,6 +2,8 @@
 
 Loosely inspired by Miniflux, another golang app.
 
+> [Just an idea for now] Maybe this app should be more than just an RSS reader. Maybe it should be a tool in aiding consuming all content. (Maybe I should split it up into separate modules/packages too but that sounds hard so I'll do that much later.) So while I get my RSS feeds, theres also sparse items that I find and want to consume. I'd like this app to have a "later" functionality, to save articles/posts/videos/whatever. It would also be nice if I could build out a viewing(reading, listening, and/or watching) queue. All hopefully to curb my incessent tab opening and never finishing content I start.
+
 ## Goals
 
 - RSS webapp
