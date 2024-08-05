@@ -42,7 +42,10 @@ func RegisterRoutes() http.Handler {
 	e := echo.New()
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
+
 	// e.Static("/", "public")
+	fileServer := http.FileServer(http.FS(views.Files))
+	e.GET("/assets/*", echo.WrapHandler(fileServer))
 
 	e.GET("/", func(c echo.Context) error {
 		return views.Render(c, views.Feeds(feeds))
