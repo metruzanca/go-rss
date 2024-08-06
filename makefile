@@ -6,3 +6,7 @@ dev:
 # Railway & Air build command
 build:
 	go build -o ./tmp/main ./cmd/
+
+tools:
+	@go install github.com/air-verse/air@latest &
+	@go install github.com/a-h/templ/cmd/templ@latest
