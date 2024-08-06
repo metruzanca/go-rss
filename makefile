@@ -6,7 +6,3 @@ dev:
 # Railway & Air build command
 build:
 	go build -o ./tmp/main ./cmd/
-
-# Railway Deployment start command
-start:
-	./tmp/main
