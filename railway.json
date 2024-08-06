@@ -4,6 +4,6 @@
     "buildCommand": "make build"
   },
   "deploy": {
-    "startCommand": "/tmp/main"
+    "startCommand": "./tmp/main"
   }
 }
