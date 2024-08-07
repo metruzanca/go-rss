@@ -12,11 +12,7 @@ import (
 
 func RegisterAuthRoutes(e *echo.Echo) {
 	e.GET("/login", func(c echo.Context) error {
-		return views.Render(c, views.LoginForm(views.Login))
-	})
-
-	e.GET("/register", func(c echo.Context) error {
-		return views.Render(c, views.LoginForm(views.Register))
+		return views.Render(c, views.LoginForm())
 	})
 
 	e.POST("/login", func(c echo.Context) error {

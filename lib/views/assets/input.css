@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  a {
+    @apply link link-primary;
+  }
+  h1 {
+    @apply text-3xl;
+  }
+  input {
+    @apply input w-full max-w-xs;
+  }
+}
