@@ -76,3 +76,53 @@ templ FeedPage(feed database.Feed) {
     </div>
   }
 }
+
+type InputProps struct {
+  Label string
+  Name string
+  Type string
+}
+
+templ Input(props InputProps) {
+  <label for="id">
+    {props.Label}
+    <input
+      class="bg-neutral-500"
+      name={props.Name}
+      type={props.Type}
+    />
+  </label>
+}
+
+const (
+  Login = iota
+  Register
+)
+
+type LoginFormProps struct{
+  Type int
+}
+
+templ LoginForm(formType int) {
+  @Layout("Login") {
+    <form class="flex flex-col gap-4">
+      @Input(InputProps{
+        Name: "username",
+        Label: "Username",
+        Type: "username",
+      })
+      @Input(InputProps{
+        Name: "password",
+        Label: "Password",
+        Type: "password",
+      })
+      <button type="submit">
+        if formType == Login {
+          Login
+        } else {
+          Signup
+        }
+      </button>
+    </form>
+  }
+}

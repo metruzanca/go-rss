@@ -13,6 +13,7 @@ Loosely inspired by Miniflux, another golang app.
 ## Planned Features
 
 - [ ] User accounts
+- [ ] Bring in DaisyUI
 - [ ] Infinitely nested folders for organizing Feeds
   - Allowing for grouping multiple feeds owned by same person/entity (e.g. youtube & blog)
 - [ ] Viewing a folder will view all contained feeds

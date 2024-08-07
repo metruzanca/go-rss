@@ -1,7 +1,13 @@
+tailwind:
+	tailwindcss -w -i lib/views/assets/input.css -o lib/views/assets/output.css
+
+templ:
+	templ generate -watch -proxy=http://localhost:3000
+
 dev:
 	air &
-	tailwindcss -w -i lib/views/assets/input.css -o lib/views/assets/output.css &
-	templ generate -watch -proxy=http://localhost:3000
+	@make tailwind &
+	@make templ
 
 # Railway & Air build command
 build:
